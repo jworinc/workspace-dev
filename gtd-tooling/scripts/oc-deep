@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# oc-deep: run OpenClaw web_search with the deep model (sonar-reasoning-pro)
+# Usage:
+#   oc-deep "query..." [count]
+
+Q="${1:-}"
+COUNT="${2:-5}"
+if [[ -z "$Q" ]]; then
+  echo "Usage: oc-deep \"query...\" [count]" >&2
+  exit 2
+fi
+
+openclaw config set tools.web.search.perplexity.model perplexity/sonar-reasoning-pro >/dev/null
+
+openclaw agent --session main --message "web_search: ${Q}" --json 2>/dev/null || \
+openclaw agent --session main --message "Use web_search for: ${Q}" >/dev/null
+
+echo "Queued web_search (sonar-reasoning-pro): $Q"

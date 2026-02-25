@@ -44,3 +44,9 @@ Track all development work across projects.
 - [ ] Test features (URL slides, presentation mode)
 - [ ] Add to monorepo (done via git add)
 
+
+### gtd-tooling
+- [x] Onboarded New project
+- [ ] Set up build
+- [ ] Test functionality
+

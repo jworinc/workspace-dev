@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# oc-search: run OpenClaw web_search with the fast default model (sonar-pro)
+# Usage:
+#   oc-search "query..." [count]
+
+Q="${1:-}"
+COUNT="${2:-5}"
+if [[ -z "$Q" ]]; then
+  echo "Usage: oc-search \"query...\" [count]" >&2
+  exit 2
+fi
+
+# Ensure model is set to sonar-pro (do not change provider/baseUrl)
+openclaw config set tools.web.search.perplexity.model perplexity/sonar-pro >/dev/null
+
+# Trigger search via agent message so results come back in chat.
+openclaw agent --session main --message "web_search: ${Q}" --json 2>/dev/null || \
+openclaw agent --session main --message "Use web_search for: ${Q}" >/dev/null
+
+echo "Queued web_search (sonar-pro): $Q"
