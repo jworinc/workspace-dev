@@ -8,6 +8,8 @@ Track all development work across projects.
 |---------|------|------|--------|
 | **present** | Swift/SwiftUI | Monorepo | ✅ Built |
 | **xtool** | Tool | Monorepo | ✅ Cloned |
+| **clog** | Log Monitor | Monorepo | ✅ Built (macOS arm64) |
+| **monitor-openclaw** | Script | Monorepo | ✅ Created |
 | (coming soon) | - | Monorepo | Empty |
 
 ## Monorepo
