@@ -16,6 +16,14 @@ Track all development work across projects.
 - [x] Test with sample project
 - [ ] Add to OpenClaw skills registry
 
+### Present App (Simon Willison)
+- [x] Clone repo from GitHub
+- [x] Clone xtool (for iOS builds)
+- [x] Install Xcode 26.4 beta
+- [x] Build Present app
+- [x] Launch Present app
+- [ ] Test features (URL slides, presentation mode)
+
 ---
 
 ## All Projects
