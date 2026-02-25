@@ -3,7 +3,7 @@
 # OpenClaw Monitoring Script
 # Uses Clog to monitor gateway logs in real-time
 
-CLOG_BIN="$HOME/.openclaw/workspace-dev/clog/clog"
+CLOG_BIN="$HOME/.openclaw/workspace-dev/clog-bin"
 GATEWAY_LOG="$HOME/.openclaw/logs/gateway.log"
 GATEWAY_ERR="$HOME/.openclaw/logs/gateway.err.log"
 
