@@ -7,8 +7,14 @@ Track all development work across projects.
 ### Setup
 - [x] Create `workspace-dev` as dedicated dev workspace
 - [x] Initialize git repo
-- [ ] Add first project
-- [ ] Set up .gitignore template
+- [x] Add first project (present)
+- [x] Set up .gitignore template
+
+### Project Onboarder Skill
+- [x] Create skill structure
+- [x] Implement onboarding script
+- [x] Test with sample project
+- [ ] Add to OpenClaw skills registry
 
 ---
 
@@ -16,4 +22,6 @@ Track all development work across projects.
 
 | Project | Type | Last Updated | Status |
 |---------|------|--------------|--------|
-| (none yet) | - | - | Empty |
+| **present** | Swift/SwiftUI | Feb 25 | Cloned from SimonW |
+| (coming soon) | - | - | Empty |
+
