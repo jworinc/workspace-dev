@@ -1,0 +1,90 @@
+name: AI-Driven Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  web-tests:
+    name: Web UI Tests (LaVague QA)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: |
+          export PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1
+          python -m pip install --upgrade pip
+          pip install lavague-qa pytest-bdd selenium
+
+      - name: Run Web UI Tests
+        run: pytest web/ -v
+
+  api-tests:
+    name: API Tests (AI Testing Agent)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: |
+          export PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1
+          python -m pip install --upgrade pip
+          pip install langchain openai pytest
+
+      - name: Run API Tests
+        run: pytest api/ -v
+
+  ai-planning:
+    name: Generate Test Plans
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai
+
+      - name: Generate AI Test Plans
+        run: |
+          # Script to generate test plans from natural language specs
+          python scripts/generate_test_plans.py
+
+      - name: Upload Test Plans
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-plans
+          path: output/test-plans/

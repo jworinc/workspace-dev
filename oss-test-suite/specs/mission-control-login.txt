@@ -1,0 +1,55 @@
+Mission Control Login Page Specification
+
+Page: /login
+
+Purpose: Allows users to authenticate with Mission Control to access their agent dashboard.
+
+Elements:
+1. Username/Email input field
+2. Password input field (masked)
+3. "Sign In" button
+4. "Forgot Password?" link
+5. "Create Account" link
+6. Error message area for invalid credentials
+
+Expected Behavior:
+1. Valid username and password:
+   - Redirects to /dashboard
+   - Shows "Welcome, [username]" message
+   - Sets authentication cookie/token
+
+2. Invalid username:
+   - Stays on login page
+   - Shows error: "Invalid username or password"
+
+3. Invalid password:
+   - Stays on login page
+   - Shows error: "Invalid username or password"
+
+4. Empty fields:
+   - "Sign In" button disabled or shows validation error
+   - No navigation occurs
+
+5. "Forgot Password?" link:
+   - Navigates to /forgot-password
+   - Opens password reset flow
+
+6. "Create Account" link:
+   - Navigates to /register
+   - Opens account creation form
+
+Validation:
+- Username: Required, valid email format
+- Password: Required, minimum 8 characters
+
+Accessibility:
+- All form elements have proper labels
+- Error messages are announced by screen readers
+- Keyboard navigation works (Tab, Enter, Escape)
+- Color contrast meets WCAG AA standards
+
+Security:
+- Password field uses type="password"
+- No password exposure in console logs
+- CSRF protection on form submission
+- Rate limiting on failed login attempts (max 5 per minute)

@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  # Optional: Local VibeProxy instance for reasoning
+  vibeproxy:
+    image: vibeproxy/local:latest
+    ports:
+      - "8318:8318"
+    environment:
+      - MODELS=zai/glm-4.7
+
+  # Optional: Local Ollama instance for embeddings
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  # Optional: Postgres for API testing if needed
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_pass
+      - POSTGRES_DB=test_db
+
+volumes:
+  ollama_data:

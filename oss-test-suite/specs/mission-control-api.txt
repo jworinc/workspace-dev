@@ -1,0 +1,33 @@
+Mission Control Health Endpoint Specification
+
+Endpoint: GET /api/v1/health
+
+Purpose: Provides the health status of the Mission Control backend service.
+
+Expected Behavior:
+1. Returns HTTP 200 OK when the service is healthy.
+2. Response body should be JSON with the following structure:
+   {
+     "status": "ok",
+     "timestamp": "2024-01-01T00:00:00Z",
+     "services": {
+       "database": "connected",
+       "gateway": "connected"
+     }
+   }
+
+3. If the database is down, the "services.database" field should be "disconnected".
+4. If the gateway connection fails, the "services.gateway" field should be "disconnected".
+5. The overall "status" should be "degraded" if any service is disconnected.
+6. If the entire service is down, return HTTP 503 Service Unavailable.
+
+Edge Cases to Test:
+- Database connection timeout
+- Gateway network timeout
+- Multiple services down simultaneously
+- Invalid timestamp format
+- Missing fields in response
+
+Performance Requirements:
+- Response time < 100ms for healthy status
+- Response time < 200ms for degraded status
